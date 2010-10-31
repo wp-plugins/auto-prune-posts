@@ -1,6 +1,6 @@
 === Auto Prune Posts ===
 Contributors: ramon fincken
-Tags: mass, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category
+Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category
 Requires at least: 2.3
 Tested up to: 3.0.1
 Stable tag: 1.0
