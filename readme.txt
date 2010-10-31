@@ -1,6 +1,6 @@
 === Auto Prune Posts ===
 Contributors: ramon fincken
-Tags: mass, delete, clean, remove, coupon, schedule, post, posts, category
+Tags: mass, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category
 Requires at least: 2.3
 Tested up to: 3.0.1
 Stable tag: 1.0
@@ -11,6 +11,7 @@ Auto deletes (prune) posts after a certain amount of time. On a per category bas
 
 Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc..<br>
 Posts will auto delete on a per category basis.<br>
+Will also trash post attachments.
 No cronjob needed :)
 
 == Installation ==
