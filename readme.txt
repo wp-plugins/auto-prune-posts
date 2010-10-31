@@ -1,0 +1,35 @@
+=== Auto Prune Posts ===
+Contributors: ramon fincken
+Tags: mass, delete, clean, remove, coupon, schedule, post, posts, category
+Requires at least: 2.3
+Tested up to: 3.0.1
+Stable tag: 1.0
+
+Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc.. Posts will auto delete on a per category basis.
+
+== Description ==
+
+Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc..<br>
+Posts will auto delete on a per category basis.<br>
+No cronjob needed :)
+
+== Installation ==
+
+1. Upload directory `auto_prune_posts` to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress.
+3. Visit Plugins menu to configure the plugin.
+
+== Frequently Asked Questions ==
+
+None available
+
+
+== Changelog ==
+
+= 1.0 =
+First release
+
+== Screenshots ==
+
+1. Start overview
+2. All options, you can update or delete each setting
