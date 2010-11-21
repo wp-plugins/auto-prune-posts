@@ -15,7 +15,7 @@ Will also trash post attachments.<br>
 No cronjob needed :)<br>
 
 * Coding by <a href="http://www.mijnpress.nl" title="MijnPress.nl WordPress ontwikkelaars">MijnPress.nl</a><br>
-* Coding by <a href="http://www.nostromo.nl">Nostromo.nl</a>
+* Idea by <a href="http://www.nostromo.nl">Nostromo.nl</a>
 
 
 == Installation ==
