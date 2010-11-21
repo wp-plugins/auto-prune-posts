@@ -11,8 +11,12 @@ Auto deletes (prune) posts after a certain amount of time. On a per category bas
 
 Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc..<br>
 Posts will auto delete on a per category basis.<br>
-Will also trash post attachments.
-No cronjob needed :)
+Will also trash post attachments.<br>
+No cronjob needed :)<br>
+
+* Coding by <a href="http://www.mijnpress.nl" title="MijnPress.nl WordPress ontwikkelaars">MijnPress.nl</a><br>
+* Coding by <a href="http://www.nostromo.nl">Nostromo.nl</a>
+
 
 == Installation ==
 
