@@ -50,7 +50,6 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 				if(!isset($plugin_autopruneposts_conf['version']) || $plugin_autopruneposts_conf['version'] == '1.0')
 				{
 					// Upgrade
-					
 					$newconfig = array();
 					foreach($plugin_autopruneposts_conf as $cat_id => $values)
 					{
@@ -151,9 +150,9 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 							$post_type = $_POST['type'];
 								
 							$plugin->conf['config'][intval($_POST['cat_id_add'])][$post_type] = array (
-                        	'period_php' => $period_php,
-                        	'period' => $period,
-                        	'period_duration' => $period_duration,
+			                        	'period_php' => $period_php,
+			                        	'period' => $period,
+			                        	'period_duration' => $period_duration,
 							'post_type' => $post_type
 							);
 							update_option('plugin_autopruneposts_conf', $plugin->conf);
@@ -217,6 +216,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 		{
 			delete_transient('auto-prune-posts-lastrun');
 			$plugin->prune();
+			echo 'Prune force called';
 			die();
 		}
 		// Show form
@@ -226,7 +226,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 	}
 
 	/**
-	 * Uses transient instead of cronjob, will run on wp call in frontend.
+	 * Uses transient instead of cronjob, will run on wp call in frontend AND backend, every 30 seconds (transient)
 	 */
 	function prune() {
 		$lastrun = get_transient('auto-prune-posts-lastrun');
@@ -248,12 +248,12 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 						$now = strtotime("now");
 						if ($post_date_plus_visibleperiod < $now) {
 							// GOGOGO !
-							//$this->delete_post_and_attachments($post->ID,$force_delete);
+							$this->delete_post_and_attachments($post->ID,$force_delete);
 	
 							// Mail admin?
 							if(!empty($this->conf['settings']['admin_email']))
 							{
-								$body = "DEMO, no post is delete DEMO Deleting post ID : ".$post->ID. "\n";
+								$body = "Deleting post ID : ".$post->ID. "\n";
 								$body .= "Post title : ".$post->post_title. "\n";
 								$body .= "Settings (Delete or Trash) : ".( ($force_delete) ? 'Delete' : 'Trash' ). "\n";
 								wp_mail($this->conf['settings']['admin_email'],'Plugin auto prune posts notification',$body);
@@ -262,7 +262,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					}
 				}
 			}
-			//set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 60*60); // 60*30 = 30 minutes
+			set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 30); // 30 seconds
 		}
 	}
 
