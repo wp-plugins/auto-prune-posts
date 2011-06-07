@@ -2,8 +2,8 @@
 Contributors: Ramon Fincken
 Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category
 Requires at least: 2.3
-Tested up to: 3.1.1
-Stable tag: 1.1
+Tested up to: 3.1.3
+Stable tag: 1.5
 
 Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc.. Posts will auto delete on a per category basis.
 
@@ -34,6 +34,8 @@ I always check my tweets, so mention my name with @ramonfincken and your problem
 
 
 == Changelog ==
+= 1.5 =
+Bugfix: Framework did not work on multisite, is_admin() problem.<br>If anyone could help me with that ? :)
 
 = 1.1 =
 Second release<br/>
