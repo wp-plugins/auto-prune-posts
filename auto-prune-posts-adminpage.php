@@ -18,7 +18,7 @@ if($action_taken)
 <br/>
 
 <form id="form1" name="form1" method="post" action="" onsubmit="return confirm('Are you sure?')">
-Delete posts in <?php wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'cat_id_add', 'hierarchical' => true, 'orderby' => 'name', 'show_option_all' => 'true')); ?> after
+Delete posts in <?php wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'cat_id_add', 'hierarchical' => true, 'orderby' => 'name', 'show_option_all' => 'All')); ?> after
 <input type="text" maxlength="6" name="period_duration_add" style="width: 45px;">
   <select name="period_add">
   <?php

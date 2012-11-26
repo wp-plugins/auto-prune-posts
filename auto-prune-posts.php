@@ -143,7 +143,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					break;
 				case 'add' :
 					if (isset ($_POST['period_duration_add']) && !empty ($_POST['period_duration_add']) && intval($_POST['period_duration_add']) > 0) {
-						if (in_array($_POST['period_add'], $plugin->periods) && intval($_POST['cat_id_add']) > 0) {
+						if (in_array($_POST['period_add'], $plugin->periods) && intval($_POST['cat_id_add']) >= 0) {
 							$period_php = intval(trim($_POST['period_duration_add'])) . ' ' . $_POST['period_add'];
 							$period = intval(trim($_POST['period_duration_add']));
 							$period_duration = $_POST['period_add'];
