@@ -43,6 +43,9 @@
  * 
  * 1.5
  * Changed: credits
+ * 
+ * 1.5.1
+ * Added: return functions
  * ------------------------------------------------------------------
  * 
  */
@@ -55,7 +58,7 @@ class mijnpress_plugin_framework
 {
     var $showcredits = true;
     var $showcredits_fordevelopers = true;
-    var $all_plugins = array('Admin renamer extended','Find replace','Simple add pages or posts','Force apply terms and conditions','GTmetrix website performance','Antispam for all fields','Mass Delete Tags','Auto Prune Posts','Warm cache','See attachments','Automatic Comment Scheduler','Register plus redux export users','Subscribe2 widget','Define Constants','Mass Delete Unused Tags','Prevent core update');
+    var $all_plugins = array('Admin renamer extended','Find replace','Simple add pages or posts','Force apply terms and conditions','GTmetrix website performance','Antispam for all fields','Mass Delete Tags','Auto Prune Posts','Warm cache','See attachments','Automatic Comment Scheduler','Register plus redux export users','Subscribe2 widget','Define Constants','Mass Delete Unused Tags','Prevent core update','WPML flag in menu', 'WPsc MijnPress','Autoptimize admin bar fix');
     
     /**
      * Left menu display in Plugin menu
@@ -79,6 +82,16 @@ class mijnpress_plugin_framework
             $links[] = '<a href="http://www.mijnpress.nl">' . __('Custom WordPress coding nodig?') . '</a>';
         }
         return $links;
+    }
+    
+    // To implement later
+    function refresh_rewrite()
+    {
+    	if(isset($_GET['rwflush']))
+		{
+			global $wp_rewrite;
+			$wp_rewrite->flush_rules();
+		}    	
     }
 
     /**
@@ -132,7 +145,7 @@ class mijnpress_plugin_framework
     {
         if($this->showcredits)
         {
-        	echo '<br/><br/>Do you like this plugin? <a href="http://donate.ramonfincken.com/">PayPal Donations</a> (even as small as $1,- or &euro;1,- are welcome!.';
+        	echo '<br/><br/>Do you like this plugin? <a href="http://donate.ramonfincken.com/">PayPal Donations</a> (even as small as $1,- or &euro;1,)- are welcome!.';
         }
         echo '</div>';
         echo '<div style="width:20%; float: right; margin-right: 10px;">';
@@ -142,6 +155,21 @@ class mijnpress_plugin_framework
         echo '<div style="clear: both;"></div>';
     }
 
+    function return_zero()
+    {
+    	return 0;
+    }
+    
+    function return_false()
+    {
+    	return false;
+    }
+    
+    function return_true()
+    {
+    	return true;
+    }    
+    
     /**
      * Shows credits or info for developers
      * @author     Ramon Fincken

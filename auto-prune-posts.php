@@ -3,7 +3,7 @@
  Plugin Name: Auto Prune Posts
  Plugin URI: http://www.mijnpress.nl
  Description: Auto deletes (prune) posts after a certain amount of time. On a per category basis.
- Version: 1.5
+ Version: 1.6
  Author: Ramon Fincken
  Author URI: http://mijnpress.nl
  Created on 31-okt-2010 17:33:40
@@ -36,7 +36,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 
 		$reset = false; // If you really want to start over, only do this when you know what you are doing matie! HarrRrr
 		if ($plugin_autopruneposts_conf === false) {
-			add_option('plugin_autopruneposts_conf', array ('version' => '1.1','settings' => $default_settings,'config' => array()), NULL, 'yes');
+			add_option('plugin_autopruneposts_conf', array ('version' => '1.6','settings' => $default_settings,'config' => array()), NULL, 'yes');
 		}
 		else
 		{
@@ -242,7 +242,20 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					$period_php = $values['period_php']; // Will be in format so strtotime can handle this [int][space][string] example: "4 day" or "5 month"
 	
 					// Get all posts for this category
-					$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=-1');
+					//$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=-1');
+					
+					if($cat_id > 0)
+					{
+						// Do only the last 50 (by date, for 1 cat)
+						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=50&order=ASCorderby=post_date');
+					}
+					else
+					{
+						// Do only the last 50 (by date, ALL)
+						$myposts = get_posts('post_type='.$the_type.'&numberposts=50&order=ASCorderby=post_date');
+					}
+					
+					
 					foreach ($myposts AS $post) {
 						$post_date_plus_visibleperiod = strtotime($post->post_date . " +" . $period_php);
 						$now = strtotime("now");
