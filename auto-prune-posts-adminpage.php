@@ -101,13 +101,20 @@ foreach($plugin->conf['config'] as $cat_id => $type)
       <td valign="top">Category</td>
       <td valign="top">
       <?php
-	  $cat = get_category($cat_id);
-      echo $cat->name. ' (id= '.$cat_id.')';
+	  if($cat_id == 0)
+	  {
+	  	echo 'All';
+	  }
+	  else
+	  {
+      	$cat = get_category($cat_id);
+      	echo $cat->name. ' (id= '.$cat_id.')';
+	  }
       ?>
 	  </td>
       <td>
       <?php
-      wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'category_parent', 'orderby' => 'name', 'selected' => $cat_id, 'hierarchical' => true));
+      wp_dropdown_categories(array('hide_empty' => 0, 'name' => 'category_parent', 'orderby' => 'name', 'selected' => $cat_id, 'hierarchical' => true, 'show_option_all' => 'All'));
       ?>
       <br/>
       Note: you cannot use this dropdown, it is only to show which category is used.
