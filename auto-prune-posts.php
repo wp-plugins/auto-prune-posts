@@ -247,12 +247,12 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					if($cat_id > 0)
 					{
 						// Do only the last 50 (by date, for 1 cat)
-						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=50&order=ASCorderby=post_date');
+						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=50&order=ASC&orderby=post_date');
 					}
 					else
 					{
 						// Do only the last 50 (by date, ALL)
-						$myposts = get_posts('post_type='.$the_type.'&numberposts=50&order=ASCorderby=post_date');
+						$myposts = get_posts('post_type='.$the_type.'&numberposts=50&order=ASC&orderby=post_date');
 					}
 					
 					
