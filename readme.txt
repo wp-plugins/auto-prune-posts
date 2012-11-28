@@ -1,18 +1,21 @@
 === Auto Prune Posts ===
 Contributors: Ramon Fincken
-Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category
+Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category, CPT
 Requires at least: 2.3
 Tested up to: 3.4.2
 Stable tag: 1.6.2
 
-Auto deletes (prune) posts after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc.. Posts will auto delete on a per category basis.
+Auto deletes (prune) posts after a certain amount of time. On a per category basis (single category, or all at once.)
+Handy if you want to have posts with a limited timeframe such as offers, coupons etc.. Posts will auto delete on a per category basis.
 
 == Description ==
 
-Auto deletes (prune) posts or pages after a certain amount of time. On a per category basis. Handy if you want to have posts with a limited timeframe such as offers, coupons etc..<br>
-Posts will auto delete on a per category basis.<br>
-All (custom)post types are supported.<br>
+Auto deletes (prune) posts or pages after a certain amount of time. On a per category basis (single category, or all at once).<br>
+Handy if you want to have posts with a limited timeframe such as offers, coupons etc..<br>
+Posts will auto delete on a per category basis: single category OR all categories at once.<br>
+All (custom)post types are supported. (CPT support)<br>
 Will also trash post attachments.<br>
+Sends notification to site admin (can be turned off).<br>
 No cronjob needed :)<br>
 
 * Coding by <a href="http://www.mijnpress.nl" title="MijnPress.nl WordPress ontwikkelaars">MijnPress.nl</a><br>
