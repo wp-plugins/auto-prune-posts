@@ -2,7 +2,7 @@
 Contributors: Ramon Fincken
 Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category, CPT
 Requires at least: 2.3
-Tested up to: 3.4.2
+Tested up to: 3.8.1
 Stable tag: 1.6.2
 
 Auto deletes (prune) posts after a certain amount of time. On a per category basis (single category, or all at once.)
