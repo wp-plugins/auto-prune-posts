@@ -3,7 +3,7 @@
  Plugin Name: Auto Prune Posts
  Plugin URI: http://www.mijnpress.nl
  Description: Auto deletes (prune) posts after a certain amount of time. On a per category basis.
- Version: 1.6.2
+ Version: 1.6.3
  Author: Ramon Fincken
  Author URI: http://mijnpress.nl
  Created on 31-okt-2010 17:33:40
@@ -210,12 +210,13 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 				$temp = array();
 			}
 			$plugin->all_types = array_merge($plugin->default_posttype,$temp);
+			delete_transient('auto-prune-posts-lastrun');
 		}
 		
 		if(isset($_GET['prune']))
 		{
 			delete_transient('auto-prune-posts-lastrun');
-			$plugin->prune();
+			$plugin->prune(true);
 			echo 'Prune force called';
 			die();
 		}
@@ -228,10 +229,10 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 	/**
 	 * Uses transient instead of cronjob, will run on wp call in frontend AND backend, every 30 seconds (transient)
 	 */
-	function prune() {
+	function prune($forced = false) {
 		$lastrun = get_transient('auto-prune-posts-lastrun');
 
-		if (false === $lastrun) {
+		if ($forced || false === $lastrun) {
 			$force_delete = ($this->conf['settings']['force_delete'] == 0) ? false : true;
 
 			// Walk
@@ -247,18 +248,18 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					if($cat_id > 0)
 					{
 						// Do only the last 50 (by date, for 1 cat)
-						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=50&order=ASC&orderby=post_date');
+						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
 					}
 					else
 					{
 						// Do only the last 50 (by date, ALL)
-						$myposts = get_posts('post_type='.$the_type.'&numberposts=50&order=ASC&orderby=post_date');
+						$myposts = get_posts('post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
 					}
-					
 					
 					foreach ($myposts AS $post) {
 						$post_date_plus_visibleperiod = strtotime($post->post_date . " +" . $period_php);
 						$now = strtotime("now");
+
 						if ($post_date_plus_visibleperiod < $now) {
 							// GOGOGO !
 							$this->delete_post_and_attachments($post->ID,$force_delete);
@@ -275,7 +276,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 					}
 				}
 			}
-			set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 30); // 30 seconds
+			set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 20); // 20 seconds
 		}
 	}
 
@@ -316,5 +317,5 @@ function plugin_auto_prune_posts_activation() {
 	$plugin_autopruneposts_initpage = new plugin_auto_prune_posts();
 	$plugin_autopruneposts_initpage->prune();
 }
-add_action('wp', 'plugin_auto_prune_posts_activation');
+add_action('plugins_loaded', 'plugin_auto_prune_posts_activation');
 ?>
