@@ -3,7 +3,7 @@
  Plugin Name: Auto Prune Posts
  Plugin URI: http://www.mijnpress.nl
  Description: Auto deletes (prune) posts after a certain amount of time. On a per category basis.
- Version: 1.6.3
+ Version: 1.6.4
  Author: Ramon Fincken
  Author URI: http://mijnpress.nl
  Created on 31-okt-2010 17:33:40
@@ -317,5 +317,5 @@ function plugin_auto_prune_posts_activation() {
 	$plugin_autopruneposts_initpage = new plugin_auto_prune_posts();
 	$plugin_autopruneposts_initpage->prune();
 }
-add_action('plugins_loaded', 'plugin_auto_prune_posts_activation');
+add_action('after_setup_theme', 'plugin_auto_prune_posts_activation');
 ?>
