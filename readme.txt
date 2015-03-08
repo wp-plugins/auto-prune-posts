@@ -2,8 +2,8 @@
 Contributors: Ramon Fincken
 Tags: mass, prune, delete, clean, remove, trash, attachment, attachments, coupon, schedule, post, posts, category, CPT
 Requires at least: 2.3
-Tested up to: 4.0
-Stable tag: 1.6.4
+Tested up to: 4.1.1
+Stable tag: 1.6.5
 
 Auto deletes (prune) posts after a certain amount of time. On a per category basis (single category, or all at once.)
 Handy if you want to have posts with a limited timeframe such as offers, coupons etc.. Posts will auto delete on a per category basis.
@@ -37,6 +37,9 @@ I always check my tweets, so mention my name with @ramonfincken and your problem
 
 
 == Changelog ==
+= 1.6.5 =
+Added: max of 600 deletes per call, 300 sec delay
+
 = 1.6.4 =
 Bugfix: Changed the init after WP rewrite, due to errors with W3 total cache
 

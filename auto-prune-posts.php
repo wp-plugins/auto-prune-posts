@@ -3,10 +3,10 @@
  Plugin Name: Auto Prune Posts
  Plugin URI: http://www.mijnpress.nl
  Description: Auto deletes (prune) posts after a certain amount of time. On a per category basis.
- Version: 1.6.4
+ Version: 1.6.5
  Author: Ramon Fincken
  Author URI: http://mijnpress.nl
- Created on 31-okt-2010 17:33:40
+ Created on 31-oct-2010 17:33:40
  */
 
 if(!class_exists('mijnpress_plugin_framework'))
@@ -231,6 +231,7 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 	 */
 	function prune($forced = false) {
 		$lastrun = get_transient('auto-prune-posts-lastrun');
+		$i_delete = 0;
 
 		if ($forced || false === $lastrun) {
 			$force_delete = ($this->conf['settings']['force_delete'] == 0) ? false : true;
@@ -244,39 +245,43 @@ class plugin_auto_prune_posts extends mijnpress_plugin_framework
 	
 					// Get all posts for this category
 					//$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=-1');
-					
-					if($cat_id > 0)
+				
+					if($i_delete < 600)
 					{
-						// Do only the last 50 (by date, for 1 cat)
-						$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
-					}
-					else
-					{
-						// Do only the last 50 (by date, ALL)
-						$myposts = get_posts('post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
-					}
+						if($cat_id > 0)
+						{
+							// Do only the last 50 (by date, for 1 cat)
+							$myposts = get_posts('category=' . $cat_id.'&post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
+						}
+						else
+						{
+							// Do only the last 50 (by date, ALL)
+							$myposts = get_posts('post_type='.$the_type.'&numberposts=75&order=ASC&orderby=post_date');
+						}
 					
-					foreach ($myposts AS $post) {
-						$post_date_plus_visibleperiod = strtotime($post->post_date . " +" . $period_php);
-						$now = strtotime("now");
+						foreach ($myposts AS $post) {
+							$post_date_plus_visibleperiod = strtotime($post->post_date . " +" . $period_php);
+							$now = strtotime("now");
 
-						if ($post_date_plus_visibleperiod < $now) {
-							// GOGOGO !
-							$this->delete_post_and_attachments($post->ID,$force_delete);
+							if ($post_date_plus_visibleperiod < $now) {
+								// GOGOGO !
+								$i_delete++;
+								$this->delete_post_and_attachments($post->ID,$force_delete);
 	
-							// Mail admin?
-							if(!empty($this->conf['settings']['admin_email']))
-							{
-								$body = "Deleting post ID : ".$post->ID. "\n";
-								$body .= "Post title : ".$post->post_title. "\n";
-								$body .= "Settings (Delete or Trash) : ".( ($force_delete) ? 'Delete' : 'Trash' ). "\n";
-								wp_mail($this->conf['settings']['admin_email'],'Plugin auto prune posts notification',$body);
+								// Mail admin?
+								if(!empty($this->conf['settings']['admin_email']))
+								{
+									$body = "Deleting post ID : ".$post->ID. "\n";
+									$body .= "Post title : ".$post->post_title. "\n";
+									$body .= "Settings (Delete or Trash) : ".( ($force_delete) ? 'Delete' : 'Trash' ). "\n";
+									wp_mail($this->conf['settings']['admin_email'],'Plugin auto prune posts notification',$body);
+								}
 							}
 						}
 					}
 				}
 			}
-			set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 20); // 20 seconds
+			set_transient('auto-prune-posts-lastrun', 'lastrun: '.time(), 300); // 300 seconds
 		}
 	}
 
